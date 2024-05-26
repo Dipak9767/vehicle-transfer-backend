@@ -8,11 +8,13 @@ export class TransferController{
         private readonly transferService: TransferService,
     ) { }
 
+    // post request to create new transfer record
     @Post()
     create(@Body() createTransferDto: CreateTransferDto) {
         return this.transferService.create(createTransferDto);
     }
 
+    // get all transfer records
     @Get()
     getAllTransfer() {
         return this.transferService.getAllTransfer();

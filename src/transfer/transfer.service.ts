@@ -19,7 +19,9 @@ export class TransferService {
 
     async create(createTransferDto: CreateTransferDto) {
 
-        const { vehicleNumber, fromDriver, toDriver } = createTransferDto;
+        const { vehicleNumber, fromDriver, toDriver } = createTransferDto; // destructuring keys
+
+        // validating vehicle number
         if (!vehicleNumber) {
             throw new HttpException({
                 success: false,
@@ -27,6 +29,8 @@ export class TransferService {
                 status: 400
             }, 400)
         }
+
+        // validating from driver
         if (!fromDriver) {
             throw new HttpException({
                 success: false,
@@ -34,6 +38,8 @@ export class TransferService {
                 status: 400
             }, 400)
         }
+
+        // validating to driver
         if (!toDriver) {
             throw new HttpException({
                 success: false,
@@ -45,6 +51,7 @@ export class TransferService {
         const getFromDriver = await this.driverRepo.findOne({ where: { id: createTransferDto?.fromDriver } })
         const getToDriver = await this.driverRepo.findOne({ where: { id: createTransferDto?.toDriver } })
 
+        // if vehicle does not exists
         if (!vehicle) {
             throw new HttpException({
                 success: false,
@@ -53,6 +60,7 @@ export class TransferService {
             }, 400)
         }
 
+        // if from driver does not exists
         if (!getFromDriver) {
             throw new HttpException({
                 success: false,
@@ -61,6 +69,7 @@ export class TransferService {
             }, 400)
         }
 
+        // if to driver does not exists
         if (!toDriver) {
             throw new HttpException({
                 success: false,
@@ -68,6 +77,8 @@ export class TransferService {
                 status: 400
             }, 400)
         }
+
+        // creating transfer record
         const transfer = await this.transferRepo.create({
             vehicle: vehicle,
             fromDriver: getFromDriver,
@@ -75,6 +86,7 @@ export class TransferService {
             transferDate: new Date()
         });
 
+        // saving and returning record
         const transferData = await this.transferRepo.save(transfer);
         return {
             success: true,
@@ -84,6 +96,7 @@ export class TransferService {
         }
     }
 
+    // get all transfer Records
     async getAllTransfer() {
         return await this.transferRepo.find({ relations: ['vehicle', 'fromDriver', 'toDriver'] });
     }

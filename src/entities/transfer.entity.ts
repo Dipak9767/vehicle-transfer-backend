@@ -8,15 +8,12 @@ export class Transfer {
     id: number;
   
     @ManyToOne(() => Vehicle)
-    @JoinColumn({ name: 'vehicle_number' })
     vehicle: Vehicle;
   
     @ManyToOne(() => Driver)
-    @JoinColumn({ name: 'from_driver_id' })
     fromDriver: Driver;
   
     @ManyToOne(() => Driver)
-    @JoinColumn({ name: 'to_driver_id' })
     toDriver: Driver;
   
     @Column()

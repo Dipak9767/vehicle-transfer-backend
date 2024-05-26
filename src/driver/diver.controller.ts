@@ -9,11 +9,13 @@ export class DriverController {
         private readonly driverService: DriverService,
     ) { }
 
+    // post request to create driver
     @Post()
     create(@Body() createDriverDto: CreateDriverDto) {
         return this.driverService.create(createDriverDto);
     }
 
+    // get request to fetch all drivers
     @Get("getAllDrivers")
     findAll(){
         return this.driverService.findAll()

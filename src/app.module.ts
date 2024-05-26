@@ -6,9 +6,10 @@ import { DriverModule } from './driver/driver.module';
 import { VehicleModule } from './vehicle/vehicle.module';
 import { TransferModule } from './transfer/transfer.module';
 import config from 'ormconfig';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [ TypeOrmModule.forRoot(config), DriverModule, VehicleModule, TransferModule],
+  imports: [ ConfigModule.forRoot() , TypeOrmModule.forRoot(config), DriverModule, VehicleModule, TransferModule],
   controllers: [AppController],
   providers: [AppService],
 })

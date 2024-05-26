@@ -12,6 +12,8 @@ export class DriverService {
 
   async create(createDriverDto: CreateDriverDto) {
     const {phoneNumber , name } = createDriverDto;
+
+    // validating phone number and name 
     if(!phoneNumber || !name){
       throw new HttpException({
         success: false,
@@ -19,6 +21,8 @@ export class DriverService {
         status:400
       }, 400)
     }
+
+    // checking if driver with this phone number already exists 
     const isDriverExist = await this.driverRepo.findOne({ where: { phoneNumber: createDriverDto?.phoneNumber } })
     if (isDriverExist) {
       throw new HttpException({
@@ -27,6 +31,8 @@ export class DriverService {
         status:400
       }, 400)
     }
+
+    // creating new driver
     const driver = await this.driverRepo.create(createDriverDto);
     await this.driverRepo.save(driver);
     return {
@@ -36,6 +42,7 @@ export class DriverService {
     };
   }
 
+  // fetch all drivers
   async findAll() {
     return {
       success:true,
