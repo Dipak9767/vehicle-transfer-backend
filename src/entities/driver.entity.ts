@@ -1,9 +1,6 @@
 import {
-    BeforeInsert,
-    BeforeUpdate,
     Column,
     Entity,
-    OneToMany,
     PrimaryGeneratedColumn,
   } from 'typeorm';
 
