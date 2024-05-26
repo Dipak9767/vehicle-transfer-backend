@@ -41,7 +41,7 @@ export class VehicleService {
       success:true,
       data:await this.vehicleRepo.find(),
       message:"fetched Vehicles successfully",
-      status:201
+      status:200
     };
 
   }

@@ -91,13 +91,19 @@ export class TransferService {
         return {
             success: true,
             data: transferData,
-            message: "Driver created successfully",
+            message: "transfered successfully",
             status: 201
         }
     }
 
     // get all transfer Records
     async getAllTransfer() {
-        return await this.transferRepo.find({ relations: ['vehicle', 'fromDriver', 'toDriver'] });
+         const transfer = await this.transferRepo.find({ relations: ['vehicle', 'fromDriver', 'toDriver'] });
+         return {
+            success: true,
+            data: transfer,
+            message: "Transfer fetched successfully",
+            status: 200
+        }
     }
 }

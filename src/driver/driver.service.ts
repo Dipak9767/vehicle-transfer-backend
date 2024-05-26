@@ -48,7 +48,7 @@ export class DriverService {
       success:true,
       data:await this.driverRepo.find(),
       message:"Fetched drivers successfully",
-      status:201
+      status:200
     };
 
   }
